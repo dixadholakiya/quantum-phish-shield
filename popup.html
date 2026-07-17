@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quantum Phish Shield</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      width: 320px;
+      padding: 16px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="icons/icon-32.png" alt="QPS Logo">
+    <h1>Quantum Shield</h1>
+  </header>
+
+  <main>
+    <div id="reputation-card" class="glass-card" style="margin-bottom: 14px;">
+      <h2 id="active-domain">Checking Page...</h2>
+      <div class="score-container">
+        <div class="score-display">
+          <span class="score-label" style="font-size: 0.75rem; color: var(--text-secondary);">Reputation Score</span>
+          <span id="reputation-score" class="score-num">--</span>
+        </div>
+        <div id="risk-category" style="font-size: 0.85rem; font-weight: 600; padding: 4px 8px; border-radius: 6px; background: rgba(255,255,255,0.05);">Pending</div>
+      </div>
+      <div class="score-bar-bg">
+        <div id="score-bar" class="score-bar-fill"></div>
+      </div>
+      <button id="open-panel-btn" class="btn-primary">
+        <span>Deep AI Audit Panel</span>
+      </button>
+    </div>
+
+    <div class="glass-card">
+      <h2>Anonymous Phishing Report</h2>
+      <input type="text" id="report-description" class="input-field" placeholder="Provide notes (e.g. Received via SMS)">
+      <button id="sign-report-btn" class="btn-primary">
+        <span>Generate PQC Signed Report</span>
+      </button>
+
+      <div id="crypto-log" class="crypto-log-container" style="display: none;"></div>
+    </div>
+  </main>
+
+  <script src="pqc.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
