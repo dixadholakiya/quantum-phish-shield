@@ -7,7 +7,12 @@
     "test": "jest"
   },
   "devDependencies": {
+    "esbuild": "^0.28.2",
     "jest": "^29.7.0"
   },
-  "type": "commonjs"
+  "type": "commonjs",
+  "dependencies": {
+    "@noble/post-quantum": "^0.7.0",
+    "crystals-kyber": "^5.1.0"
+  }
 }
