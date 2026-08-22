@@ -259,3 +259,50 @@ h2 {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.24);
 }
+
+/* Decoy input highlight states */
+.decoy-active {
+  border-color: #A855F7 !important;
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.4) !important;
+  background: rgba(168, 85, 247, 0.05) !important;
+  transition: all 0.3s ease;
+}
+
+/* Deception Shield UI container styling */
+.deception-shield {
+  border: 1px solid rgba(168, 85, 247, 0.2) !important;
+  background: rgba(168, 85, 247, 0.02) !important;
+  margin-top: 14px;
+}
+
+.deception-shield:hover {
+  border-color: rgba(168, 85, 247, 0.5) !important;
+  box-shadow: 0 8px 32px 0 rgba(168, 85, 247, 0.15) !important;
+}
+
+.btn-deception {
+  background: linear-gradient(135deg, #A855F7 0%, #7C3AED 100%) !important;
+  color: #FFF !important;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-family: var(--font-system);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.btn-deception:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(168, 85, 247, 0.4) !important;
+}
+
+.btn-deception:active {
+  transform: translateY(1px);
+}

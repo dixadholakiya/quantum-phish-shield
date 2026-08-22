@@ -69,6 +69,34 @@
       } catch (err) {
         sendResponse({ success: false, error: err.message });
       }
+    } else if (message.action === 'injectHoneyCredentials') {
+      try {
+        const { email, password } = message;
+        const inputs = document.querySelectorAll('input');
+        let injected = false;
+        
+        inputs.forEach(input => {
+          const type = (input.type || '').toLowerCase();
+          const name = (input.name || '').toLowerCase();
+          const id = (input.id || '').toLowerCase();
+          
+          if (type === 'password') {
+            input.value = password;
+            input.classList.add('decoy-active');
+            injected = true;
+          } else if (type === 'email' || type === 'text' || name.includes('user') || name.includes('email') || name.includes('login') || id.includes('user') || id.includes('email') || id.includes('login')) {
+            if (type !== 'password') {
+              input.value = email;
+              input.classList.add('decoy-active');
+              injected = true;
+            }
+          }
+        });
+        
+        sendResponse({ success: injected });
+      } catch (err) {
+        sendResponse({ success: false, error: err.message });
+      }
     }
     return true; // Keep message channel open for async response
   });

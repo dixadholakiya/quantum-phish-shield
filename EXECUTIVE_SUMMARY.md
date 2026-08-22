@@ -30,6 +30,9 @@ Traditionally, to block spam, systems require you to sign in to report a threat.
 ### 🧠 Layer 3: On-Device AI Guard
 Instead of sending the contents of the page you are viewing to a cloud server to analyze it (which could leak private information), the extension uses an AI model (**Gemini Nano**) running **directly on your computer**. It audits pages locally and explains risks privately.
 
+### 🕸️ Layer 4: Active Cyber Deception (Honey-Credentials)
+Instead of just passively warning you to leave a high-risk phishing page, QPS lets you actively fight back. With a single click, it generates a high-value fake email (e.g. `ops.sec@gov.in`) and a password cryptographically signed with your post-quantum key. It automatically injects these into the phishing login forms, poisoning the attacker's harvested database and turning their stolen credentials list into a trap.
+
 ---
 
 ## 3. Real-World Scenario Use Cases
@@ -41,10 +44,10 @@ Here are three scenarios showing how Quantum Phish Shield protects different use
 * **The Risk**: If they open it and report it using a standard browser tool, state-sponsored hackers monitoring the database will see that a diplomat at a specific embassy flagged their link, alerting the hackers that they were detected.
 * **The QPS Solution**: The diplomat opens the page. The extension flags it as a threat. The diplomat submits an anonymous report. The threat registry receives a verified report, but the hackers cannot track it back to the diplomat or the embassy.
 
-### Scenario B: The Power Grid Operator (Critical Infrastructure)
-* **The Situation**: An operator at a power station is browsing internal monitoring dashboards and external technical forums.
-* **The Risk**: Clicking a bad link could lead to a phishing page designed to steal utility access credentials.
-* **The QPS Solution**: The operator doesn't need to click anything. As they browse, the extension's toolbar icon turns red (showing **`RISK`**). Because a password box was detected on a suspicious site, the extension immediately slides open the **Deep AI Audit Panel** on the right, warning the operator to close the tab before entering any credentials.
+### Scenario B: The Power Grid Operator (Critical Infrastructure Deception)
+* **The Situation**: An operator at a power station is browsing internal monitoring dashboards and external technical forums, and clicks a phishing link that opens a fake utility portal.
+* **The Risk**: Entering credentials would compromise the utility network, but simply closing the tab leaves the attacker's infrastructure active and unmonitored.
+* **The QPS Solution**: The operator's extension instantly turns red (**`RISK`**). Instead of just closing the tab, the operator clicks **"Inject Honey-Credentials"**. QPS injects decoy credentials with a hidden post-quantum signed signature. When the attacker harvests these and tries to use them on the real utility network later, the internal security servers immediately detect the decoy signature, automatically blacklist the attacker's connection, alert the security operations center, and trace their source.
 
 ### Scenario C: The Anti-Phishing Registry Administrator
 * **The Situation**: An administrator manages a national database of blacklisted phishing domains.

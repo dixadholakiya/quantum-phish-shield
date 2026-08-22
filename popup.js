@@ -12,6 +12,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   const reportDescription = document.getElementById('report-description');
   const cryptoLog = document.getElementById('crypto-log');
 
+  // Deception Shield variables
+  const deceptionCard = document.getElementById('deception-card');
+  const injectDecoyBtn = document.getElementById('inject-decoy-btn');
+  const deceptionStatus = document.getElementById('deception-status');
+
   let currentTab = null;
 
   // Retrieve active tab details
@@ -32,6 +37,11 @@ document.addEventListener('DOMContentLoaded', async () => {
           riskCategory.style.backgroundColor = `${intel.color}15`;
           scoreBar.style.width = `${intel.threatScore}%`;
           scoreBar.style.backgroundColor = intel.color;
+
+          // Enable Active Deception Shield for High-Risk domains
+          if (intel.threatScore > 75) {
+            deceptionCard.style.display = 'block';
+          }
         } else {
           activeDomainLabel.textContent = "Unable to analyze";
         }
@@ -51,6 +61,48 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch (err) {
       console.error("Failed to open sidepanel:", err);
     }
+  });
+
+  // Handle Honey-Credentials injection for Active Deception
+  injectDecoyBtn.addEventListener('click', async () => {
+    if (!currentTab) return;
+    
+    deceptionStatus.style.display = 'block';
+    deceptionStatus.style.color = '#A855F7';
+    deceptionStatus.textContent = 'Generating Post-Quantum Decoy keys...';
+    
+    await delay(300);
+    
+    // 1. Generate keypair for decoy signing
+    const decoyKeys = globalThis.PQC.dilithiumKeyGen();
+    
+    // 2. Generate signature verifying this is an authentic honey-credential
+    const hostname = new URL(currentTab.url).hostname;
+    const payload = `${hostname}_${Date.now()}`;
+    const sigResult = await globalThis.PQC.dilithiumSign(payload, decoyKeys.privateKey);
+    const sigHex = toHex(sigResult.signature.slice(0, 16));
+    
+    // 3. Prepare realistic fake credential
+    const decoyEmail = `ops.sec_${Math.floor(Math.random() * 900 + 100)}@gov.in`;
+    const decoyPassword = `HoneyPass_${sigHex}`;
+    
+    deceptionStatus.textContent = 'Injecting decoy inputs into webpage form...';
+    await delay(300);
+    
+    // 4. Send message to content script to perform DOM injection
+    chrome.tabs.sendMessage(currentTab.id, {
+      action: 'injectHoneyCredentials',
+      email: decoyEmail,
+      password: decoyPassword
+    }, (res) => {
+      if (res && res.success) {
+        deceptionStatus.style.color = 'var(--color-success)';
+        deceptionStatus.textContent = '✓ Decoy Credentials Injected & Highlighted!';
+      } else {
+        deceptionStatus.style.color = 'var(--color-danger)';
+        deceptionStatus.textContent = '⚠️ Decoy Injection failed (no inputs found).';
+      }
+    });
   });
 
   // Handle Post-Quantum anonymous report generation

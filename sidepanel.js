@@ -22,6 +22,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   
   const reportsLog = document.getElementById('reports-log');
 
+  // Deception Shield variables
+  const deceptionCard = document.getElementById('deception-card');
+  const injectDecoyBtn = document.getElementById('inject-decoy-btn');
+  const deceptionStatus = document.getElementById('deception-status');
+
   let activeUrl = null;
 
   // Initialize view from active tab or last selected context link
@@ -66,6 +71,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       // Reset displays
       aiExplanation.innerHTML = `Analyzing page features using local threat engine...`;
       sigPwdWarning.style.display = 'none';
+      deceptionCard.style.display = 'none';
+      deceptionStatus.style.display = 'none';
 
       // 1. Fetch Threat Intelligence via background worker
       chrome.runtime.sendMessage({ action: 'fetchThreatIntelligence', url: urlStr }, (response) => {
@@ -89,6 +96,11 @@ document.addEventListener('DOMContentLoaded', async () => {
           
           // Trigger local AI interpretation based on metrics
           generateAiExplanation(intel);
+
+          // Enable Active Deception Shield for High-Risk domains
+          if (intel.threatScore > 75) {
+            deceptionCard.style.display = 'block';
+          }
         } else {
           inspectedDomain.textContent = "Threat Intel Offline";
         }
@@ -190,6 +202,53 @@ document.addEventListener('DOMContentLoaded', async () => {
       loadReportsLog(activeUrl);
     }
   });
+
+  // Handle Honey-Credentials injection for Active Deception
+  injectDecoyBtn.addEventListener('click', async () => {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    if (!tab) return;
+    
+    deceptionStatus.style.display = 'block';
+    deceptionStatus.style.color = '#A855F7';
+    deceptionStatus.textContent = 'Generating Post-Quantum Decoy keys...';
+    
+    await delay(300);
+    
+    // 1. Generate keypair for decoy signing
+    const decoyKeys = globalThis.PQC.dilithiumKeyGen();
+    
+    // 2. Generate signature verifying this is an authentic honey-credential
+    const hostname = new URL(tab.url).hostname;
+    const payload = `${hostname}_${Date.now()}`;
+    const sigResult = await globalThis.PQC.dilithiumSign(payload, decoyKeys.privateKey);
+    const sigHex = toHex(sigResult.signature.slice(0, 16));
+    
+    // 3. Prepare realistic fake credential
+    const decoyEmail = `ops.sec_${Math.floor(Math.random() * 900 + 100)}@gov.in`;
+    const decoyPassword = `HoneyPass_${sigHex}`;
+    
+    deceptionStatus.textContent = 'Injecting decoy inputs into webpage form...';
+    await delay(300);
+    
+    // 4. Send message to content script to perform DOM injection
+    chrome.tabs.sendMessage(tab.id, {
+      action: 'injectHoneyCredentials',
+      email: decoyEmail,
+      password: decoyPassword
+    }, (res) => {
+      if (res && res.success) {
+        deceptionStatus.style.color = 'var(--color-success)';
+        deceptionStatus.textContent = '✓ Decoy Credentials Injected & Highlighted!';
+      } else {
+        deceptionStatus.style.color = 'var(--color-danger)';
+        deceptionStatus.textContent = '⚠️ Decoy Injection failed (no inputs found).';
+      }
+    });
+  });
+
+  function toHex(array) {
+    return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
+  }
 
   function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
