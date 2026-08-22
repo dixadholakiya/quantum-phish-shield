@@ -1,0 +1,13 @@
+{
+  "name": "quantum-phish-shield",
+  "version": "1.0.0",
+  "description": "Privacy-preserving anonymous phishing reporter utilizing post-quantum simulated cryptography & on-device AI threat explanations.",
+  "main": "background.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "type": "commonjs"
+}

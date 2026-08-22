@@ -72,4 +72,14 @@
     }
     return true; // Keep message channel open for async response
   });
+
+  // Automatically execute and send DOM metrics to service worker on page load
+  try {
+    const metrics = extractSignals();
+    chrome.runtime.sendMessage({ action: 'autoReportSignals', metrics }).catch(() => {
+      // Ignore if background worker isn't active/listening yet
+    });
+  } catch (err) {
+    console.warn("Auto DOM signal reporting failed:", err);
+  }
 })();

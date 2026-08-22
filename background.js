@@ -13,9 +13,6 @@ chrome.runtime.onInstalled.addListener(() => {
   console.log("Quantum Phish Shield context menus initialized.");
 });
 
-// Configure Side Panel behavior
-chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true })
-  .catch(error => console.error("Error setting side panel behavior:", error));
 
 // Handle Context Menu Actions
 chrome.contextMenus.onClicked.addListener(async (info, tab) => {
@@ -39,8 +36,67 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   }
 });
 
-// Handle incoming messages from popup or sidepanel
+// Automatically audit page reputation and update action badges on navigation
+chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
+  if (changeInfo.status === 'complete' && tab.url && tab.url.startsWith('http')) {
+    try {
+      const urlObj = new URL(tab.url);
+      const domain = urlObj.hostname;
+      const intel = generateThreatIntel(domain);
+      
+      // Update badge text and color based on risk classification
+      let badgeText = "SAFE";
+      let badgeColor = "#10B981"; // Emerald green
+      
+      if (intel.threatScore > 40 && intel.threatScore <= 75) {
+        badgeText = "WARN";
+        badgeColor = "#F59E0B"; // Amber orange
+      } else if (intel.threatScore > 75) {
+        badgeText = "RISK";
+        badgeColor = "#EF4444"; // Rose red
+      }
+      
+      await chrome.action.setBadgeText({ text: badgeText, tabId: tabId });
+      await chrome.action.setBadgeBackgroundColor({ color: badgeColor, tabId: tabId });
+
+      // Proactively open the side panel for High-Risk threats
+      if (intel.threatScore > 75) {
+        await chrome.sidePanel.open({ tabId: tabId });
+      }
+    } catch (err) {
+      console.error("Error in automated page audit:", err);
+    }
+  }
+});
+
+// Handle incoming messages from popup, sidepanel, or content scripts
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.action === 'autoReportSignals') {
+    (async () => {
+      const tabId = sender.tab?.id;
+      if (!tabId) return;
+      
+      const metrics = message.metrics;
+      if (metrics && metrics.hasPasswordInput && metrics.url) {
+        try {
+          const urlObj = new URL(metrics.url);
+          const domain = urlObj.hostname;
+          const intel = generateThreatIntel(domain);
+          
+          // Escalate Suspicious pages to High-Risk if password input is detected
+          if (intel.threatScore > 40) {
+            await chrome.action.setBadgeText({ text: "RISK", tabId: tabId });
+            await chrome.action.setBadgeBackgroundColor({ color: "#EF4444", tabId: tabId });
+            await chrome.sidePanel.open({ tabId: tabId });
+          }
+        } catch (err) {
+          console.error("Error handling auto-report signals:", err);
+        }
+      }
+    })();
+    return true; // Keep channel open
+  }
+
   if (message.action === 'fetchThreatIntelligence') {
     (async () => {
       try {

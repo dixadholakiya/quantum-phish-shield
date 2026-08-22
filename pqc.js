@@ -97,7 +97,7 @@ class PQC {
   static async dilithiumSign(message, privateKey) {
     // Compute hash of the message payload
     const encoder = new TextEncoder();
-    const data = encoder.encode(message + JSON.stringify(privateKey.s1));
+    const data = encoder.encode(message);
     const hashBuffer = await crypto.subtle.digest("SHA-256", data);
     const hashArray = Array.from(new Uint8Array(hashBuffer));
     
@@ -117,6 +117,16 @@ class PQC {
     const data = encoder.encode(message);
     const hashBuffer = await crypto.subtle.digest("SHA-256", data);
     const hashArray = Array.from(new Uint8Array(hashBuffer));
+    
+    // Verify that the hash computed from current message matches the signature's hash
+    if (!signatureResult || !signatureResult.hash) {
+      return false;
+    }
+    for (let i = 0; i < hashArray.length; i++) {
+      if (hashArray[i] !== signatureResult.hash[i]) {
+        return false;
+      }
+    }
     
     // Perform simulated algebraic verify (check signature structure matching public values)
     let errorSum = 0;
