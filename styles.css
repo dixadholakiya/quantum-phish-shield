@@ -576,3 +576,61 @@ h2 {
   box-shadow: 0 0 10px rgba(139, 92, 246, 0.4);
 }
 
+/* Voice control buttons */
+.chat-mic-btn {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: var(--text-secondary) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 8px;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.chat-mic-btn:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: var(--text-primary) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Pulse animation when recording is active */
+.chat-mic-btn.listening {
+  background: #EF4444 !important;
+  color: #FFF !important;
+  border-color: #EF4444 !important;
+  animation: micPulse 1.5s infinite ease-in-out;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.6) !important;
+}
+
+@keyframes micPulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+  70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+.voice-toggle-btn {
+  background: transparent !important;
+  color: var(--text-secondary) !important;
+  border: none !important;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  transition: color 0.2s ease;
+}
+
+.voice-toggle-btn:hover {
+  color: var(--text-primary) !important;
+}
+
+.voice-toggle-btn.voice-active {
+  color: var(--color-cyan) !important;
+  filter: drop-shadow(0 0 4px rgba(6, 182, 212, 0.4));
+}
+
+

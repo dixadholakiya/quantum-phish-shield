@@ -40,6 +40,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   const chatSendBtn = document.getElementById('chat-send-btn');
   const aiExplanation = document.getElementById('ai-explanation');
 
+  // AI Voice elements
+  const chatVoiceToggle = document.getElementById('chat-voice-toggle');
+  const voiceIconMuted = document.getElementById('voice-icon-muted');
+  const voiceIconActive = document.getElementById('voice-icon-active');
+  const chatMicBtn = document.getElementById('chat-mic-btn');
+
   let activeUrl = null;
   let currentIntel = null;
   let currentMetrics = null;
@@ -298,6 +304,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           const result = await session.prompt(prompt);
           typingBubble.innerHTML = result;
           chatMessages.scrollTop = chatMessages.scrollHeight;
+          speak(result); // Speak response aloud
           session.destroy();
           return;
         }
@@ -332,6 +339,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     typingBubble.innerHTML = reply;
     chatMessages.scrollTop = chatMessages.scrollHeight;
+    speak(reply); // Speak response aloud
   }
 
   // ==========================================================================
@@ -423,6 +431,88 @@ document.addEventListener('DOMContentLoaded', async () => {
       loadReportsLog(activeUrl);
     }
   });
+
+  // ==========================================================================
+  // Voice Assistant Synthesis & Recognition Controllers
+  // ==========================================================================
+  let voiceEnabled = false;
+  let recognition = null;
+
+  function speak(text) {
+    if (!voiceEnabled) return;
+    
+    // Cancel any active speech
+    window.speechSynthesis.cancel();
+    
+    // Strip HTML and markdown formatting for cleaner synthesis speech
+    const cleanText = text.replace(/<[^>]*>/g, '').replace(/[\*\_#`✓⚠️❌]/g, '');
+    
+    const utterance = new SpeechSynthesisUtterance(cleanText);
+    const voices = window.speechSynthesis.getVoices();
+    const defaultVoice = voices.find(v => v.lang.startsWith('en') && v.name.includes('Google')) || voices.find(v => v.lang.startsWith('en'));
+    if (defaultVoice) {
+      utterance.voice = defaultVoice;
+    }
+    
+    window.speechSynthesis.speak(utterance);
+  }
+
+  // Speaker Voice Feedback Toggle
+  chatVoiceToggle.addEventListener('click', () => {
+    voiceEnabled = !voiceEnabled;
+    if (voiceEnabled) {
+      chatVoiceToggle.classList.add('voice-active');
+      voiceIconMuted.style.display = 'none';
+      voiceIconActive.style.display = 'block';
+      speak("Kavach Voice assistant activated.");
+    } else {
+      chatVoiceToggle.classList.remove('voice-active');
+      voiceIconMuted.style.display = 'block';
+      voiceIconActive.style.display = 'none';
+      window.speechSynthesis.cancel();
+    }
+  });
+
+  // Initialize Speech Recognition
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (SpeechRecognition) {
+    recognition = new SpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.lang = 'en-US';
+    
+    recognition.onstart = () => {
+      chatMicBtn.classList.add('listening');
+      chatInput.placeholder = 'Listening...';
+    };
+    
+    recognition.onerror = (e) => {
+      console.error("Speech recognition error:", e);
+      chatMicBtn.classList.remove('listening');
+      chatInput.placeholder = 'Ask assistant about this page...';
+    };
+    
+    recognition.onend = () => {
+      chatMicBtn.classList.remove('listening');
+      chatInput.placeholder = 'Ask assistant about this page...';
+    };
+    
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      chatInput.value = transcript;
+      handleChatSubmit();
+    };
+    
+    chatMicBtn.addEventListener('click', () => {
+      if (chatMicBtn.classList.contains('listening')) {
+        recognition.stop();
+      } else {
+        recognition.start();
+      }
+    });
+  } else {
+    chatMicBtn.style.display = 'none'; // Hide if unsupported
+  }
 
   function toHex(array) {
     return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
