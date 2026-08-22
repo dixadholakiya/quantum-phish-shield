@@ -306,3 +306,273 @@ h2 {
 .btn-deception:active {
   transform: translateY(1px);
 }
+
+/* ==========================================================================
+   Tab Navigation & Layout Configuration
+   ========================================================================== */
+.tabs-container {
+  display: flex;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 3px;
+  margin-bottom: 16px;
+  gap: 4px;
+}
+
+.tab-btn {
+  flex: 1;
+  background: transparent;
+  color: var(--text-secondary);
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-family: var(--font-system);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.tab-btn:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.tab-btn.active {
+  background: rgba(139, 92, 246, 0.15) !important;
+  border: 1px solid rgba(139, 92, 246, 0.3) !important;
+  color: #C084FC !important;
+}
+
+.tab-panel {
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+  animation: tabFadeIn 0.3s ease-out;
+}
+
+.tab-panel.active {
+  display: flex;
+}
+
+@keyframes tabFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   Animated SVG Security Core HUD
+   ========================================================================== */
+.hud-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.05) 0%, transparent 70%);
+  border-radius: 12px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.security-core-svg {
+  width: 90px;
+  height: 90px;
+  filter: drop-shadow(0 0 12px rgba(16, 185, 129, 0.4));
+  transition: filter 0.5s ease;
+}
+
+/* Rotating SVG HUD elements */
+.hud-ring-outer {
+  transform-origin: center;
+  animation: rotateCW 12s linear infinite;
+}
+
+.hud-ring-inner {
+  transform-origin: center;
+  animation: rotateCCW 8s linear infinite;
+}
+
+.hud-center-orb {
+  transform-origin: center;
+  animation: pulseOrb 2.5s ease-in-out infinite;
+}
+
+/* Core States: Dynamic transitions depending on risk classification */
+.core-secure {
+  color: var(--color-success) !important;
+  filter: drop-shadow(0 0 12px rgba(16, 185, 129, 0.5));
+}
+.core-secure .hud-center-orb {
+  animation-duration: 2.5s;
+}
+
+.core-warn {
+  color: var(--color-warn) !important;
+  filter: drop-shadow(0 0 12px rgba(245, 158, 11, 0.6));
+}
+.core-warn .hud-ring-outer {
+  animation-duration: 6s;
+}
+.core-warn .hud-center-orb {
+  animation-duration: 1.5s;
+}
+
+.core-alert {
+  color: var(--color-danger) !important;
+  filter: drop-shadow(0 0 16px rgba(239, 68, 68, 0.8));
+}
+.core-alert .hud-ring-outer {
+  animation-duration: 3s;
+}
+.core-alert .hud-ring-inner {
+  animation-duration: 2s;
+}
+.core-alert .hud-center-orb {
+  animation-duration: 0.7s;
+}
+
+@keyframes rotateCW {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes rotateCCW {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+@keyframes pulseOrb {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 1; }
+}
+
+/* ==========================================================================
+   Terminal Console Diagnostic Logs
+   ========================================================================== */
+.console-log-panel {
+  width: 100%;
+  background: #05070D;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 10px;
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  height: 95px;
+  overflow-y: auto;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.log-line {
+  margin-bottom: 4px;
+  line-height: 1.3;
+  color: var(--color-cyan);
+}
+
+.log-line-success {
+  color: var(--color-success);
+}
+
+.log-line-warning {
+  color: var(--color-warn);
+}
+
+.log-line-danger {
+  color: var(--color-danger);
+}
+
+/* ==========================================================================
+   Interactive AI Chat Interface
+   ========================================================================== */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 380px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  background: rgba(5, 7, 13, 0.4);
+  overflow: hidden;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chat-bubble {
+  max-width: 85%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.bubble-user {
+  align-self: flex-end;
+  background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%);
+  color: #FFF;
+  border-bottom-right-radius: 2px;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
+}
+
+.bubble-assistant {
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+  border-bottom-left-radius: 2px;
+}
+
+.chat-input-container {
+  display: flex;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  gap: 8px;
+}
+
+.chat-input-container input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: var(--text-primary);
+  font-family: var(--font-system);
+  font-size: 0.82rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.chat-input-container input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.15);
+}
+
+.chat-send-btn {
+  background: var(--color-accent);
+  color: #FFF;
+  border: none;
+  border-radius: 8px;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.chat-send-btn:hover {
+  background: #7C3AED;
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.4);
+}
+

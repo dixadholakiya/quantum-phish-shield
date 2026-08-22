@@ -2,109 +2,161 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Quantum Shield Intelligence</title>
+  <title>Quantum Shield Assistant</title>
   <link rel="stylesheet" href="styles.css">
   <style>
     body {
       width: 100%;
       height: 100vh;
-      padding: 16px;
+      padding: 14px;
+      overflow-y: auto;
     }
     main {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 12px;
     }
   </style>
 </head>
 <body>
   <header>
     <img src="icons/icon-48.png" alt="QPS Logo">
-    <h1>Quantum Shield Intelligence</h1>
+    <h1>Kavach Assistant</h1>
   </header>
 
   <main>
-    <!-- Threat Intel Section -->
-    <div class="glass-card">
-      <h2 id="inspected-domain">Inspecting Site...</h2>
-      
-      <div class="score-container">
-        <div class="score-display">
-          <span class="score-label" style="font-size: 0.75rem; color: var(--text-secondary);">Phishing Risk Score</span>
-          <span id="threat-score" class="score-num" style="color: var(--color-success);">0%</span>
-        </div>
-        <div id="risk-category" style="font-size: 0.85rem; font-weight: 600; padding: 4px 8px; border-radius: 6px; background: rgba(16, 185, 129, 0.15); color: var(--color-success);">Low Risk</div>
+    <!-- Quantum Security HUD (Orb & Diagnostic Logs) -->
+    <div class="hud-container">
+      <svg id="security-core" class="security-core-svg core-secure" viewBox="0 0 100 100">
+        <!-- Outer Ring -->
+        <circle class="hud-ring-outer" cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="20 10" />
+        <!-- Inner Ring -->
+        <circle class="hud-ring-inner" cx="50" cy="50" r="30" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="10 5" />
+        <!-- Orbiting Nodes -->
+        <circle cx="50" cy="10" r="3" fill="currentColor" />
+        <circle cx="50" cy="90" r="3" fill="currentColor" />
+        <!-- Center Orb -->
+        <circle class="hud-center-orb" cx="50" cy="50" r="16" fill="currentColor" opacity="0.9" />
+        <!-- Inner core pulse -->
+        <circle cx="50" cy="50" r="8" fill="#FFF" opacity="0.4" />
+      </svg>
+      <div id="console-logs" class="console-log-panel" style="margin-top: 12px;">
+        <div class="log-line">[+] Shield Core Initialized. Ready for page analysis.</div>
       </div>
-      
-      <div class="score-bar-bg">
-        <div id="threat-bar" class="score-bar-fill" style="width: 0%; background: var(--color-success);"></div>
+    </div>
+
+    <!-- Interactive Navigation Tabs -->
+    <div class="tabs-container">
+      <button class="tab-btn active" data-target="tab-audit">Console</button>
+      <button class="tab-btn" data-target="tab-chat">Assistant</button>
+      <button class="tab-btn" data-target="tab-deception">Deception</button>
+    </div>
+
+    <!-- TAB 1: AUDIT CONSOLE PANEL -->
+    <div id="tab-audit" class="tab-panel active">
+      <!-- Domain reputation card -->
+      <div class="glass-card">
+        <h2 id="inspected-domain">Inspecting Site...</h2>
+        
+        <div class="score-container">
+          <div class="score-display">
+            <span class="score-label" style="font-size: 0.72rem; color: var(--text-secondary);">Phishing Risk Score</span>
+            <span id="threat-score" class="score-num" style="color: var(--color-success);">0%</span>
+          </div>
+          <div id="risk-category" style="font-size: 0.82rem; font-weight: 600; padding: 4px 8px; border-radius: 6px; background: rgba(16, 185, 129, 0.15); color: var(--color-success);">Low Risk</div>
+        </div>
+        
+        <div class="score-bar-bg">
+          <div id="threat-bar" class="score-bar-fill" style="width: 0%; background: var(--color-success);"></div>
+        </div>
+
+        <div class="meta-grid">
+          <div class="meta-item">
+            <div class="meta-label">Domain Age</div>
+            <div id="meta-age" class="meta-value">--</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">Hosting Country</div>
+            <div id="meta-country" class="meta-value">--</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">SSL Authentication</div>
+            <div id="meta-ssl" class="meta-value">--</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">Blacklists</div>
+            <div id="meta-blacklist" class="meta-value">--</div>
+          </div>
+        </div>
       </div>
 
-      <div class="meta-grid">
-        <div class="meta-item">
-          <div class="meta-label">Domain Age</div>
-          <div id="meta-age" class="meta-value">--</div>
+      <!-- Inspected Page Signals -->
+      <div class="glass-card">
+        <h2>Inspected Page Signals</h2>
+        <div class="meta-grid" style="grid-template-columns: 1fr 1fr 1fr;">
+          <div class="meta-item" style="text-align: center;">
+            <div class="meta-label">Forms</div>
+            <div id="sig-forms" class="meta-value" style="font-size: 1.1rem; font-weight: bold;">0</div>
+          </div>
+          <div class="meta-item" style="text-align: center;">
+            <div class="meta-label">Inputs</div>
+            <div id="sig-inputs" class="meta-value" style="font-size: 1.1rem; font-weight: bold;">0</div>
+          </div>
+          <div class="meta-item" style="text-align: center;">
+            <div class="meta-label">Ext Links</div>
+            <div id="sig-links" class="meta-value" style="font-size: 1.1rem; font-weight: bold;">0</div>
+          </div>
         </div>
-        <div class="meta-item">
-          <div class="meta-label">Hosting Country</div>
-          <div id="meta-country" class="meta-value">--</div>
-        </div>
-        <div class="meta-item">
-          <div class="meta-label">SSL Authentication</div>
-          <div id="meta-ssl" class="meta-value">--</div>
-        </div>
-        <div class="meta-item">
-          <div class="meta-label">Blacklists</div>
-          <div id="meta-blacklist" class="meta-value">--</div>
+        <div id="sig-pwd-warning" style="margin-top: 10px; font-size: 0.8rem; color: var(--color-danger); display: none; font-weight: 500;">
+          ⚠️ Warning: Password input detected on this unverified page!
         </div>
       </div>
     </div>
 
-    <!-- AI Explanation Section -->
-    <div class="glass-card">
-      <h2>AI-Assisted Threat Explanation</h2>
-      <div id="ai-explanation" class="ai-block">
-        Initializing local AI model capabilities...
+    <!-- TAB 2: AI ASSISTANT CHAT PANEL -->
+    <div id="tab-chat" class="tab-panel">
+      <!-- Local AI Prompt summary assessment -->
+      <div class="glass-card">
+        <h2>AI Security Briefing</h2>
+        <div id="ai-explanation" class="ai-block">
+          Waiting for threat analysis to complete...
+        </div>
+      </div>
+
+      <!-- Assistant conversation thread -->
+      <div class="chat-container">
+        <div id="chat-messages" class="chat-messages">
+          <div class="chat-bubble bubble-assistant">
+            Hello! I am your <strong>Kavach Security Assistant</strong>. I have completed a local post-quantum risk audit of this domain. Ask me anything about its threat indicators, SSL parameters, or overall safety.
+          </div>
+        </div>
+        <div class="chat-input-container">
+          <input type="text" id="chat-input" placeholder="Ask assistant about this page...">
+          <button id="chat-send-btn" class="chat-send-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          </button>
+        </div>
       </div>
     </div>
 
-    <!-- Dynamic DOM Signals Section -->
-    <div class="glass-card">
-      <h2>Inspected Page Signals</h2>
-      <div class="meta-grid" style="grid-template-columns: 1fr 1fr 1fr;">
-        <div class="meta-item" style="text-align: center;">
-          <div class="meta-label">Forms</div>
-          <div id="sig-forms" class="meta-value" style="font-size: 1.1rem; font-weight: bold;">0</div>
-        </div>
-        <div class="meta-item" style="text-align: center;">
-          <div class="meta-label">Inputs</div>
-          <div id="sig-inputs" class="meta-value" style="font-size: 1.1rem; font-weight: bold;">0</div>
-        </div>
-        <div class="meta-item" style="text-align: center;">
-          <div class="meta-label">Ext Links</div>
-          <div id="sig-links" class="meta-value" style="font-size: 1.1rem; font-weight: bold;">0</div>
-        </div>
+    <!-- TAB 3: DECEPTION & AUDIT LOGS PANEL -->
+    <div id="tab-deception" class="tab-panel">
+      <!-- Active Deception Shield (Honey-Credentials) -->
+      <div id="deception-card" class="glass-card deception-shield" style="display: none;">
+        <h2 style="color: #A855F7;">Active Deception Shield</h2>
+        <p style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 12px;">This domain is classified as High-Risk. Inject decoy credentials with hidden cryptographic signatures to poison the threat actor's database.</p>
+        <button id="inject-decoy-btn" class="btn-deception">
+          <span>Inject Honey-Credentials</span>
+        </button>
+        <div id="deception-status" style="font-size: 0.72rem; color: #A855F7; margin-top: 8px; font-weight: 500; display: none;"></div>
       </div>
-      <div id="sig-pwd-warning" style="margin-top: 10px; font-size: 0.8rem; color: var(--color-danger); display: none; font-weight: 500;">
-        ⚠️ Warning: Password input detected on this unverified page!
-      </div>
-    </div>
 
-    <!-- Active Deception Shield Section -->
-    <div id="deception-card" class="glass-card deception-shield" style="display: none;">
-      <h2 style="color: #A855F7;">Active Deception Shield</h2>
-      <p style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 12px;">This domain is classified as High-Risk. Inject decoy credentials with hidden cryptographic signatures to poison the threat actor's database.</p>
-      <button id="inject-decoy-btn" class="btn-deception">
-        <span>Inject Honey-Credentials</span>
-      </button>
-      <div id="deception-status" style="font-size: 0.72rem; color: #A855F7; margin-top: 8px; font-weight: 500; display: none;"></div>
-    </div>
-
-    <!-- Verifiable Reports Log -->
-    <div class="glass-card">
-      <h2>Verifiable Reports Audit Log</h2>
-      <div id="reports-log" style="font-size: 0.8rem; color: var(--text-secondary); max-height: 120px; overflow-y: auto;">
-        No local reports recorded.
+      <!-- Reports History Log -->
+      <div class="glass-card">
+        <h2>Verifiable Reports Audit Log</h2>
+        <div id="reports-log" style="font-size: 0.8rem; color: var(--text-secondary); max-height: 140px; overflow-y: auto;">
+          No local reports recorded.
+        </div>
       </div>
     </div>
   </main>
