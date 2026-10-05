@@ -1,0 +1,6 @@
+Industry Vertical,Primary Cryptographic Primitives,Target TPS Requirement,Latency Tolerance,Primary Security & Integrity Objective,Key Regulatory Compliance Standard
+"Sovereign CBDC & Inter-Bank Settlement","QKD-OTP (Consensus) + Falcon-512 (Retail) + STARKs","> 50,000 TPS","< 500 ms","Sovereign immutability, zero counterfeit issuance, AML privacy","CPMI-IOSCO PFMI, BIS CBDC Security Directives"
+"MEV-Free DeFi & Automated Exchanges","Threshold ML-KEM-1024 + Leveled-FHE (BGV)","> 15,000 TPS","< 100 ms","Elimination of front-running, sandwich attacks, and MEV","MiCA (EU Markets in Crypto-Assets), SEC Best Execution"
+"Smart Grid SCADA & Energy Trading","Falcon-512 + Lattice Vector Commitments (LVC)","> 5,000 TPS","< 10 ms","Real-time false-data injection prevention, low RAM footprint","NERC CIP (Critical Infrastructure Protection), IEC 62351"
+"Healthcare EHR & Genomic Ledgers","ML-KEM-1024 Stealth Addresses + Lattice FHE","> 1,000 TPS","< 2 s","Multi-generational Store-Now-Decrypt-Later (SNDL) defense","HIPAA Security Rule, GDPR Article 9 (Special Category Data)"
+"Defense & Space Logistics Provenance","Air-Gapped LVC + Satellite Free-Space QKD","> 2,500 TPS","< 1 s","Counterfeit component interception, air-gapped offline verify","DoDI 8500.01 (Cybersecurity), NIST SP 800-161 Supply Chain"

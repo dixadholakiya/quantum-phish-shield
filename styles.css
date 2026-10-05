@@ -1,18 +1,19 @@
-/* styles.css - Corporate Cyber-Hardened Dark CSS System */
+/* styles.css - Corporate Quantum Shield Light CSS System */
 
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --bg-primary: #090C15;
-  --bg-card: rgba(20, 24, 38, 0.65);
-  --border-glow: rgba(138, 43, 226, 0.35);
-  --border-cyan: rgba(0, 255, 255, 0.3);
-  --text-primary: #F3F4F6;
-  --text-secondary: #9CA3AF;
-  --color-accent: #8B5CF6;
-  --color-cyan: #06B6D4;
-  --color-danger: #EF4444;
-  --color-success: #10B981;
+  --bg-primary: #F5F7FA;
+  --bg-card: rgba(255, 255, 255, 0.85);
+  --border-glow: rgba(109, 40, 217, 0.25);
+  --border-cyan: rgba(6, 150, 180, 0.3);
+  --text-primary: #1A1D2E;
+  --text-secondary: #5B6178;
+  --color-accent: #7C3AED;
+  --color-cyan: #0891B2;
+  --color-danger: #DC2626;
+  --color-success: #059669;
+  --color-warn: #D97706;
   --font-system: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
@@ -35,16 +36,16 @@ body {
   background: var(--bg-card);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 12px;
   padding: 16px;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.04);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .glass-card:hover {
   border-color: var(--border-glow);
-  box-shadow: 0 8px 32px 0 rgba(138, 43, 226, 0.15);
+  box-shadow: 0 4px 20px 0 rgba(124, 58, 237, 0.1), 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 /* Title Header Grid */
@@ -52,7 +53,7 @@ header {
   display: flex;
   align-items: center;
   gap: 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   padding-bottom: 14px;
   margin-bottom: 16px;
 }
@@ -65,7 +66,7 @@ header img {
 h1 {
   font-size: 1.25rem;
   font-weight: 600;
-  background: linear-gradient(135deg, #00FFFF 0%, #8B5CF6 100%);
+  background: linear-gradient(135deg, #0891B2 0%, #7C3AED 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   letter-spacing: -0.5px;
@@ -99,7 +100,7 @@ h2 {
 
 .btn-primary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.4);
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.3);
 }
 
 .btn-primary:active {
@@ -107,9 +108,9 @@ h2 {
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.03);
   color: var(--text-primary);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   padding: 8px 14px;
   font-family: var(--font-system);
@@ -122,15 +123,15 @@ h2 {
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.06);
+  border-color: rgba(0, 0, 0, 0.18);
 }
 
 /* Form element styles */
 .input-field {
   width: 100%;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 8px;
   padding: 10px;
   color: var(--text-primary);
@@ -143,7 +144,7 @@ h2 {
 
 .input-field:focus {
   border-color: var(--color-cyan);
-  box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.15);
+  box-shadow: 0 0 0 2px rgba(8, 145, 178, 0.12);
 }
 
 /* Score Dial/Bar Component */
@@ -167,7 +168,7 @@ h2 {
 .score-bar-bg {
   width: 100%;
   height: 6px;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.06);
   border-radius: 3px;
   overflow: hidden;
   margin-bottom: 16px;
@@ -189,8 +190,8 @@ h2 {
 }
 
 .meta-item {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 8px;
   padding: 8px 10px;
 }
@@ -210,8 +211,8 @@ h2 {
 
 /* Cryptographic Step-by-Step logs */
 .crypto-log-container {
-  background: #05070D;
-  border: 1px solid rgba(0, 255, 255, 0.1);
+  background: #F8FAFC;
+  border: 1px solid rgba(8, 145, 178, 0.15);
   border-radius: 8px;
   padding: 10px;
   font-family: monospace;
@@ -234,12 +235,12 @@ h2 {
 /* AI explanation block */
 .ai-block {
   border-left: 3px solid var(--color-accent);
-  background: rgba(139, 92, 246, 0.04);
+  background: rgba(124, 58, 237, 0.04);
   padding: 10px;
   border-radius: 0 8px 8px 0;
   font-size: 0.82rem;
   line-height: 1.4;
-  color: #D1D5DB;
+  color: #4B5063;
 }
 
 /* Scrollbar customizations */
@@ -252,32 +253,32 @@ h2 {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.12);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.24);
+  background: rgba(0, 0, 0, 0.22);
 }
 
 /* Decoy input highlight states */
 .decoy-active {
   border-color: #A855F7 !important;
-  box-shadow: 0 0 10px rgba(168, 85, 247, 0.4) !important;
-  background: rgba(168, 85, 247, 0.05) !important;
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.25) !important;
+  background: rgba(168, 85, 247, 0.04) !important;
   transition: all 0.3s ease;
 }
 
 /* Deception Shield UI container styling */
 .deception-shield {
-  border: 1px solid rgba(168, 85, 247, 0.2) !important;
-  background: rgba(168, 85, 247, 0.02) !important;
+  border: 1px solid rgba(168, 85, 247, 0.18) !important;
+  background: rgba(168, 85, 247, 0.03) !important;
   margin-top: 14px;
 }
 
 .deception-shield:hover {
-  border-color: rgba(168, 85, 247, 0.5) !important;
-  box-shadow: 0 8px 32px 0 rgba(168, 85, 247, 0.15) !important;
+  border-color: rgba(168, 85, 247, 0.35) !important;
+  box-shadow: 0 4px 16px 0 rgba(168, 85, 247, 0.1) !important;
 }
 
 .btn-deception {
@@ -300,7 +301,7 @@ h2 {
 
 .btn-deception:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(168, 85, 247, 0.4) !important;
+  box-shadow: 0 4px 14px rgba(168, 85, 247, 0.3) !important;
 }
 
 .btn-deception:active {
@@ -312,8 +313,8 @@ h2 {
    ========================================================================== */
 .tabs-container {
   display: flex;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.07);
   border-radius: 8px;
   padding: 3px;
   margin-bottom: 16px;
@@ -337,13 +338,13 @@ h2 {
 
 .tab-btn:hover {
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(0, 0, 0, 0.04);
 }
 
 .tab-btn.active {
-  background: rgba(139, 92, 246, 0.15) !important;
-  border: 1px solid rgba(139, 92, 246, 0.3) !important;
-  color: #C084FC !important;
+  background: rgba(124, 58, 237, 0.08) !important;
+  border: 1px solid rgba(124, 58, 237, 0.2) !important;
+  color: #7C3AED !important;
 }
 
 .tab-panel {
@@ -371,16 +372,16 @@ h2 {
   align-items: center;
   justify-content: center;
   padding: 16px;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.05) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.05) 0%, transparent 70%);
   border-radius: 12px;
   margin-bottom: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
 .security-core-svg {
   width: 90px;
   height: 90px;
-  filter: drop-shadow(0 0 12px rgba(16, 185, 129, 0.4));
+  filter: drop-shadow(0 0 8px rgba(5, 150, 105, 0.3));
   transition: filter 0.5s ease;
 }
 
@@ -403,7 +404,7 @@ h2 {
 /* Core States: Dynamic transitions depending on risk classification */
 .core-secure {
   color: var(--color-success) !important;
-  filter: drop-shadow(0 0 12px rgba(16, 185, 129, 0.5));
+  filter: drop-shadow(0 0 8px rgba(5, 150, 105, 0.35));
 }
 .core-secure .hud-center-orb {
   animation-duration: 2.5s;
@@ -411,7 +412,7 @@ h2 {
 
 .core-warn {
   color: var(--color-warn) !important;
-  filter: drop-shadow(0 0 12px rgba(245, 158, 11, 0.6));
+  filter: drop-shadow(0 0 8px rgba(217, 119, 6, 0.4));
 }
 .core-warn .hud-ring-outer {
   animation-duration: 6s;
@@ -422,7 +423,7 @@ h2 {
 
 .core-alert {
   color: var(--color-danger) !important;
-  filter: drop-shadow(0 0 16px rgba(239, 68, 68, 0.8));
+  filter: drop-shadow(0 0 10px rgba(220, 38, 38, 0.5));
 }
 .core-alert .hud-ring-outer {
   animation-duration: 3s;
@@ -454,8 +455,8 @@ h2 {
    ========================================================================== */
 .console-log-panel {
   width: 100%;
-  background: #05070D;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: #F1F5F9;
+  border: 1px solid rgba(0, 0, 0, 0.07);
   border-radius: 8px;
   padding: 10px;
   font-family: monospace;
@@ -463,7 +464,7 @@ h2 {
   color: var(--text-secondary);
   height: 95px;
   overflow-y: auto;
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
 .log-line {
@@ -491,9 +492,9 @@ h2 {
   display: flex;
   flex-direction: column;
   height: 380px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 12px;
-  background: rgba(5, 7, 13, 0.4);
+  background: rgba(255, 255, 255, 0.6);
   overflow: hidden;
 }
 
@@ -520,13 +521,13 @@ h2 {
   background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%);
   color: #FFF;
   border-bottom-right-radius: 2px;
-  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.2);
 }
 
 .bubble-assistant {
   align-self: flex-start;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #F1F5F9;
+  border: 1px solid rgba(0, 0, 0, 0.06);
   color: var(--text-primary);
   border-bottom-left-radius: 2px;
 }
@@ -534,15 +535,15 @@ h2 {
 .chat-input-container {
   display: flex;
   padding: 10px;
-  background: rgba(0, 0, 0, 0.3);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.02);
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
   gap: 8px;
 }
 
 .chat-input-container input {
   flex: 1;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 8px;
   padding: 8px 12px;
   color: var(--text-primary);
@@ -554,7 +555,7 @@ h2 {
 
 .chat-input-container input:focus {
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.15);
+  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.1);
 }
 
 .chat-send-btn {
@@ -572,15 +573,15 @@ h2 {
 }
 
 .chat-send-btn:hover {
-  background: #7C3AED;
-  box-shadow: 0 0 10px rgba(139, 92, 246, 0.4);
+  background: #6D28D9;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.3);
 }
 
 /* Voice control buttons */
 .chat-mic-btn {
-  background: rgba(255, 255, 255, 0.05) !important;
+  background: rgba(0, 0, 0, 0.03) !important;
   color: var(--text-secondary) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
   border-radius: 8px;
   width: 36px;
   height: 36px;
@@ -592,24 +593,24 @@ h2 {
 }
 
 .chat-mic-btn:hover {
-  background: rgba(255, 255, 255, 0.1) !important;
+  background: rgba(0, 0, 0, 0.06) !important;
   color: var(--text-primary) !important;
-  border-color: rgba(255, 255, 255, 0.2) !important;
+  border-color: rgba(0, 0, 0, 0.18) !important;
 }
 
 /* Pulse animation when recording is active */
 .chat-mic-btn.listening {
-  background: #EF4444 !important;
+  background: #DC2626 !important;
   color: #FFF !important;
-  border-color: #EF4444 !important;
+  border-color: #DC2626 !important;
   animation: micPulse 1.5s infinite ease-in-out;
-  box-shadow: 0 0 12px rgba(239, 68, 68, 0.6) !important;
+  box-shadow: 0 0 12px rgba(220, 38, 38, 0.4) !important;
 }
 
 @keyframes micPulse {
-  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
-  70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
-  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.5); }
+  70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
 }
 
 .voice-toggle-btn {
@@ -630,7 +631,5 @@ h2 {
 
 .voice-toggle-btn.voice-active {
   color: var(--color-cyan) !important;
-  filter: drop-shadow(0 0 4px rgba(6, 182, 212, 0.4));
+  filter: drop-shadow(0 0 4px rgba(8, 145, 178, 0.3));
 }
-
-
